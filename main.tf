@@ -1,3 +1,8 @@
+data "vsphere_resource_pool" "pool" {
+  name          = "Resources"
+  datacenter_id = var.datacenter
+}
+
 data "vsphere_virtual_machine" "template" {
   name          = var.vm_template
   datacenter_id = var.datacenter
@@ -21,7 +26,7 @@ resource "vsphere_virtual_machine" "vm" {
   num_cpus = var.cpus
   memory   = var.memory
 
-  resource_pool_id = var.resource_pool
+  resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = var.datastore
 
   network_interface {
