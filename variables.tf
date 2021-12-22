@@ -1,5 +1,5 @@
 variable "datacenter" {
-  description = "Datacenter name"
+  description = "Datacenter id"
 }
 
 variable "datastore" {

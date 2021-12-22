@@ -1,25 +1,6 @@
-data "vsphere_datacenter" "dc" {
-  name = var.datacenter
-}
-
-data "vsphere_datastore" "datastore" {
-  name          = var.datastore
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_resource_pool" "pool" {
-  name          = "Resources"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
 data "vsphere_virtual_machine" "template" {
   name          = var.vm_template
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_network" "network" {
-  name          = var.network
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = var.datacenter
 }
 
 data "template_cloudinit_config" "config" {
@@ -40,11 +21,11 @@ resource "vsphere_virtual_machine" "vm" {
   num_cpus = var.cpus
   memory   = var.memory
 
-  resource_pool_id = data.vsphere_resource_pool.pool.id
-  datastore_id     = data.vsphere_datastore.datastore.id
+  resource_pool_id = var.resource_pool
+  datastore_id     = var.datastore
 
   network_interface {
-    network_id   = data.vsphere_network.network.id
+    network_id   = var.network
     adapter_type = data.vsphere_virtual_machine.template.network_interface_types[0]
   }
 
