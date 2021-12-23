@@ -9,7 +9,7 @@ data "vsphere_virtual_machine" "template" {
 }
 
 data "template_cloudinit_config" "config" {
-  gzip          = true
+  gzip          = false
   base64_encode = true
 
   part {
@@ -51,6 +51,6 @@ resource "vsphere_virtual_machine" "vm" {
 
   extra_config = {
     "guestinfo.userdata"          = data.template_cloudinit_config.config.rendered
-    "guestinfo.userdata.encoding" = "gzip+base64"
+    "guestinfo.userdata.encoding" = "base64"
   }
 }
