@@ -11,5 +11,6 @@ write_files:
           gateway4: ${ipv4_gateway}
           nameservers:
             addresses: [8.8.8.8, 8.8.4.4]
+          critical: true
 runcmd:
 - netplan apply
