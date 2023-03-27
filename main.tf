@@ -29,6 +29,7 @@ data "template_cloudinit_config" "config" {
       ipv4_address  = var.ipv4_address
       ipv4_netmask  = var.ipv4_netmask
       ipv4_gateway  = var.ipv4_gateway
+      domain        = var.domain
       })
     }
   }

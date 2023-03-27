@@ -63,3 +63,8 @@ variable "dhcp" {
   description = "enable dhcp"
   default     = true
 }
+
+variable "domain" {
+  description = "search domain"
+  default     = ""
+}
