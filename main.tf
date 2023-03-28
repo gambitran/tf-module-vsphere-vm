@@ -81,4 +81,10 @@ resource "vsphere_virtual_machine" "vm" {
       "user-data"   = var.dhcp == false || var.user_data != "" ? data.template_cloudinit_config.config.rendered : null
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      vapp
+    ]
+  }
 }
